@@ -1,0 +1,4 @@
+escape ^Ff
+defscrollback 9999
+defflow auto interrupt
+bind o flow

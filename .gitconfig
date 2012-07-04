@@ -1,0 +1,14 @@
+[github]
+	user = ehuss
+	token = a650f5f773e0942d92120e770fdb797b
+[user]
+	name = Eric Huss
+	email = eric@huss.org
+[branch]
+    autosetuprebase = always
+[push]
+    default = upstream
+[alias]
+    # Aliases from Jamie.
+    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+    co = checkout
