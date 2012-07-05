@@ -44,7 +44,7 @@ set_if_found() {
     # $2 = program looking for
     # $3 (optional) = pattern to set to.  Use {} to substitute the binary path.
     # GNU which is annoying, prints to stderr when not found.
-    local WHAT="`which $2` 2>/dev/null"
+    local WHAT="`which $2 2>/dev/null`"
     if [ $WHAT ]
     then
         if [ "$3" ]
