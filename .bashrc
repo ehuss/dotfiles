@@ -78,17 +78,18 @@ alias CPAN="perl -MCPAN -e shell"
 alias sur="sudo -E `which bash`"
 
 rfind() {
-    find . -type f -exec grep "$@" {} /dev/null \;
+    grep --devices=skip -r "$@" *
 }
 pyfind() {
-    find . \( -name "*.py" -or -name "*.pxi" -or -name "*.pxd" -or -name "*.pyx" \) -exec grep "$@" {} /dev/null \;
+    grep -r --include="*.py" --include "*.pxi" --include "*.pxd" --include "*.pyx" "$@" *
 }
 cfind() {
-    find . \( -name "*.[CHchm]" -or -name "*.cc" -or -name "*.cpp" -or -name "*.[cC]++" -or -name "*.cxx" \
-    -or -name "*.hpp" -o -name "*.hxx" -o -name "*.[hH]++" -o -name "*.hh" \) -exec grep "$@" {} /dev/null \;
+    grep -r --include="*.[CHchm]" --include="*.cc" --include="*.cpp" \
+        --include="*.[cC]++" --include="*.cxx" --include="*.hpp" \
+        --include="*.hxx" --include="*.[hH]++" --include="*.hh" "$@" *
 }
 tmplfind() {
-    find . -name "*.tmpl" -exec grep "$@" {} /dev/null \;
+    grep -r --include="*.tmpl" "$@" *
 }
 alias ps="ps -jaxwww"
 alias dir="ls -lFG"
