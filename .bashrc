@@ -67,6 +67,7 @@ export CVS_RSH=ssh
 
 set_if_found LESSOPEN lesspipe.sh "|{} %s"
 set_if_found EDITOR vim
+set_if_found GIT_EXTERNAL_DIFF ~/bin/my_diff.sh
 
 export HTML_TIDY=$HOME/.tidy_config.txt
 
