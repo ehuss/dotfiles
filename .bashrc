@@ -58,7 +58,7 @@ set_if_found() {
 
 ##############################################################################
 # Settings for various programs.
-export PAGER="less -siXM"
+export PAGER="less -siXMn"
 export BUILDTOP=$HOME/work
 export BLOCKSIZE K
 export RSYNC_RSH=ssh
