@@ -24,6 +24,8 @@ set -o noclobber
 # ** is a recursive expansion.
 shopt -s globstar
 
+bind 'set completion-ignore-case on'
+
 ##############################################################################
 # Functions for this bash script.
 one_of() {
