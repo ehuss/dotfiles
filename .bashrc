@@ -7,7 +7,6 @@
 pathadd() {
     if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]
     then
-        echo adding $1
         PATH="${PATH:+"$PATH:"}$1"
         # To put at beginning: PATH="$1:$PATH
     fi
