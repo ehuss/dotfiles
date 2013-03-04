@@ -2,32 +2,25 @@
 # This is sourced when bash is loaded *except* when it's a login shell.
 
 ##############################################################################
-# General shell things.
-
-# A righteous umask
-umask 22
-
-export PATH=/opt/local/bin:/opt/local/sbin:$HOME/bin:/sbin:/bin:/usr/sbin:/usr/bin:/usr/games:/usr/local/sbin:/usr/local/bin:/usr/X11R6/bin
-
-#export MANPATH=/opt/local/share/man:$MANPATH
-
-# & prevents duplicate lines in bash history.
-export HISTIGNORE="&"
-export HISTFILESIZE=2000
-export HISTSIZE=2000
-
-# Automatically updated window size after every command (LINES/COLUMNS env
-# vars).
-shopt -s checkwinsize
-# When redirecting output, don't overwrite existing files.
-set -o noclobber
-# ** is a recursive expansion.
-shopt -s globstar
-
-bind 'set completion-ignore-case on'
-
-##############################################################################
 # Functions for this bash script.
+
+pathadd() {
+    if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]
+    then
+        echo adding $1
+        PATH="${PATH:+"$PATH:"}$1"
+        # To put at beginning: PATH="$1:$PATH
+    fi
+}
+
+pathaddall() {
+    VALS=(${1//:/ })
+    for VAL in "${VALS[@]}"
+    do
+        pathadd $VAL
+    done
+}
+
 one_of() {
     # Goes through arguments and finds the first one that exists as a file.
     local F
@@ -57,6 +50,32 @@ set_if_found() {
         fi
     fi
 }
+
+##############################################################################
+# General shell things.
+
+# A righteous umask
+umask 22
+
+#export MANPATH=/opt/local/share/man:$MANPATH
+
+# & prevents duplicate lines in bash history.
+export HISTIGNORE="&"
+export HISTFILESIZE=2000
+export HISTSIZE=2000
+
+# Automatically updated window size after every command (LINES/COLUMNS env
+# vars).
+shopt -s checkwinsize
+# When redirecting output, don't overwrite existing files.
+set -o noclobber
+# ** is a recursive expansion.
+shopt -s globstar
+
+bind 'set completion-ignore-case on'
+
+pathaddall /opt/local/bin:/opt/local/sbin:$HOME/bin:/sbin:/bin:/usr/sbin:/usr/bin:/usr/games:/usr/local/sbin:/usr/local/bin:/usr/X11R6/bin
+
 
 ##############################################################################
 # Settings for various programs.
