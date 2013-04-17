@@ -69,7 +69,8 @@ shopt -s checkwinsize
 # When redirecting output, don't overwrite existing files.
 set -o noclobber
 # ** is a recursive expansion.
-shopt -s globstar
+# (For some reason, not available on os x's bash.)
+[[ $(shopt) =~ "globstar" ]] && shopt -s globstar
 
 bind 'set completion-ignore-case on'
 
