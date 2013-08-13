@@ -6,6 +6,9 @@ import os.path
 import glob
 import shutil
 
+try: input = raw_input
+except NameError: pass
+
 home = os.getenv('HOME')
 realhome = os.path.realpath(home)
 
@@ -25,7 +28,7 @@ def main():
                 doit = False
             else:
                 print('%s already exists.' % hf)
-                response = raw_input('Would you like to make a backup and replace it with a symlink? [y/n]')
+                response = input('Would you like to make a backup and replace it with a symlink? [y/n]')
                 if response.lower() != 'y':
                     print('Will not overwrite.')
                     doit = False
