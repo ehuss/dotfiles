@@ -17,7 +17,7 @@ def main():
         print('You must run this from within the dotfiles directory.')
         return
 
-    for filename in glob.glob('.[a-z]*'):
+    for filename in glob.glob('.[a-zA-Z]*'):
         if filename == '.git':
             continue
         doit = True
