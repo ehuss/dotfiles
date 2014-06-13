@@ -119,6 +119,7 @@ alias pico="pico -w"
 alias less="less -iXM"
 alias grep="grep -i"
 alias screenx="screen -x"
+alias pss="pss -i"
 _VIM=`which vim 2>/dev/null`
 if [ $_VIM ]
 then
