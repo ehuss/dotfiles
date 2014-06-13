@@ -86,7 +86,13 @@ export RSYNC_RSH=ssh
 export CVS_RSH=ssh
 #export PACKAGESITE=ftp://ftp4.us.freebsd.org/pub/FreeBSD/ports/i386/packages-4-stable/Latest/
 
-set_if_found LESSOPEN lesspipe.sh "|{} %s"
+# Since /usr/local/bin occurs after /usr/bin
+if [ -e /usr/local/bin/lesspipe.sh ]
+then
+    export LESSOPEN="|/usr/local/bin/lesspipe.sh %s"
+else
+    set_if_found LESSOPEN lesspipe.sh "|{} %s"
+fi
 set_if_found EDITOR vim
 set_if_found GIT_EXTERNAL_DIFF ~/bin/my_diff.sh
 
