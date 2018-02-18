@@ -7,16 +7,19 @@
 pathadd() {
     if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]
     then
-        PATH="${PATH:+"$PATH:"}$1"
+        PATH="$1:$PATH"
+        # Appends to end:
+        #PATH="${PATH:+"$PATH:"}$1"
         # To put at beginning: PATH="$1:$PATH
     fi
 }
 
 pathaddall() {
+    # Split on colon.
     VALS=(${1//:/ })
-    for VAL in "${VALS[@]}"
-    do
-        pathadd $VAL
+    # Iterate in reverse order, since they will be added to front.
+    for ((i=${#VALS[@]}-1; i>=0; i--)); do
+        pathadd ${VALS[$i]}
     done
 }
 
