@@ -77,7 +77,7 @@ set -o noclobber
 
 bind 'set completion-ignore-case on'
 
-pathaddall /opt/local/bin:/opt/local/sbin:$HOME/bin:/sbin:/bin:/usr/sbin:/usr/bin:/usr/games:/usr/local/sbin:/usr/local/bin:/usr/X11R6/bin
+pathaddall $HOME/bin:/sbin:/bin:/usr/sbin:/usr/bin:/usr/games:/usr/local/sbin:/usr/local/bin:/usr/X11R6/bin
 
 
 ##############################################################################
@@ -100,6 +100,8 @@ set_if_found EDITOR vim
 set_if_found GIT_EXTERNAL_DIFF ~/bin/my_diff.sh
 
 export HTML_TIDY=$HOME/.tidy_config.txt
+
+export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 
 ##############################################################################
 # Aliases for convenience.
@@ -156,3 +158,6 @@ if [ -f ~/.profile.local ]
 then
     . ~/.profile.local
 fi
+
+# added by travis gem
+[ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
