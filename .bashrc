@@ -105,10 +105,23 @@ export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 
 ##############################################################################
 # Aliases for convenience.
+alias_if_found() {
+    # $1 = command to set
+    # $2 = program looking for
+    # GNU which is annoying, prints to stderr when not found.
+    local WHAT="`which $2 2>/dev/null`"
+    if [ $WHAT ]
+    then
+        alias $1=$2
+    fi
+}
+
 alias pydebug="python /usr/local/lib/pydebug.py"
 alias CPAN="perl -MCPAN -e shell"
 # -E will preserve the environment.
 alias sur="sudo -E `which bash`"
+alias_if_found git hub
+alias_if_found vi vim
 
 rfind() {
     grep --devices=skip -r "$@" *
@@ -131,12 +144,7 @@ alias less="less -iXM"
 alias grep="grep -i"
 alias screenx="screen -x"
 alias pss="pss -i"
-_VIM=`which vim 2>/dev/null`
-if [ $_VIM ]
-then
-    alias vi="$_VIM"
-fi
-unset _VIM
+alias jsonpy="python -m json.tool"
 
 #export PYTHONSTARTUP=/home/ehuss/.python_start.py
 
@@ -144,20 +152,21 @@ if [ $UID == "0" ]
 then
     export PS1="ROOT \h \# \w> "
 else
-    export PS1="\h \# \w> "
+    #export PS1="\h \# \w> "
+    export PS1="\w> "
 fi
-
-BC=`one_of /usr/local/etc/bash_completion /opt/local/etc/bash_completion`
-if [ $BC ]
-then
-    . $BC
-fi
-unset BC
 
 if [ -f ~/.profile.local ]
 then
     . ~/.profile.local
 fi
+
+BC=`one_of /usr/local/share/bash-completion/bash_completion /usr/local/etc/bash_completion /opt/local/etc/bash_completion`
+if [ $BC ]
+then
+    . $BC
+fi
+unset BC
 
 # added by travis gem
 [ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
