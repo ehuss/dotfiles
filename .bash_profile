@@ -1,5 +1,9 @@
 # .bash_profile sourced in login shells.
-if [ -f .bashrc ]
+# login, non-interactive shells (bash -l) only load this file.
+# needed by shellenv in Sublime
+if [ -f $HOME/.bashrc ]
 then
-	. .bashrc
+	. $HOME/.bashrc
 fi
+
+export PATH="$HOME/.cargo/bin:$PATH"
